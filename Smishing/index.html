@@ -1,0 +1,202 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smishing Detection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        textarea {
+            width: 80%;
+            height: 100px;
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        p {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Smishing Detector</h1>
+    <textarea id="smsMessage" placeholder="Enter your SMS message"></textarea><br>
+    <button onclick="analyzeMessage()">Analyze</button>
+    <p id="result"></p>
+
+    <script>
+        async function analyzeMessage() {
+            const message = document.getElementById('smsMessage').value.trim();
+            const resultElement = document.getElementById('result');
+            
+            if (!message) {
+                alert('Please enter a message.');
+                return;
+            }
+            
+            try {
+                // Make API call to the backend for classification (replace with your actual API URL)
+                const response = await fetch('http://127.0.0.1:8000/predict', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ text: message })
+                });
+
+                const data = await response.json();
+                resultElement.innerHTML = `Result: ${data.result}`;
+            } catch (error) {
+                console.error(error);
+                resultElement.innerHTML = 'Error analyzing the message.';
+            }
+        }
+    </script>
+</body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smishing Detection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            color: #0056b3;
+        }
+        textarea {
+            width: 80%;
+            height: 100px;
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #218bb9;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #218bb9;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        p {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .phishing {
+            color: red;
+        }
+        .benign {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <h1>Smishing Detector</h1>
+    <textarea id="smsMessage" placeholder="Enter your SMS message"></textarea><br>
+    <button onclick="analyzeMessage()">Analyze</button>
+    <p id="result"></p>
+
+    <script>
+        async function analyzeMessage() {
+            const message = document.getElementById('smsMessage').value.trim();
+            const resultElement = document.getElementById('result');
+            
+            if (!message) {
+                alert('Please enter a message.');
+                return;
+            }
+            
+            try {
+                // Make API call to the backend for classification (replace with your actual API URL)
+                const response = await fetch('http://127.0.0.1:8000/predict', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ text: message })
+                });
+
+                const data = await response.json();
+
+                // Adjust the message display based on the result
+                if (data.result === "phishing") {
+                    resultElement.innerHTML = 'Result: <span class="phishing">Phishing</span>';
+                } else {
+                    resultElement.innerHTML = 'Result: <span class="benign">Not Phishing</span>';
+                }
+            } catch (error) {
+                console.error(error);
+                resultElement.innerHTML = '<span style="color: red;">Error analyzing the message</span>';
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmishFind</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container">
+    <h1>Smishing Detector</h1>
+    <textarea id="smsText" placeholder="Enter your SMS message"></textarea>
+    <button id="submitBtn">Analyze</button>
+    <div id="result" class="result"></div>
+  </div>
+
+  <script>
+    document.getElementById("submitBtn").addEventListener("click", function() {
+      const smsText = document.getElementById("smsText").value;
+      if (!smsText.trim()) {
+        alert("Please enter a message.");
+        return;
+      }
+
+      // Mocked response for testing
+      const result = "Likely Smishing";  // Change this value based on actual model prediction
+
+      document.getElementById("result").innerHTML = `Result: <strong>${result}</strong>`;
+      document.getElementById("result").style.display = "block";
+    });
+  </script>
+
+</body>
+</html> -->
